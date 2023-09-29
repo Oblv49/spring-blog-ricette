@@ -8,16 +8,14 @@
     <div class="row text-center mt-3 mb-0">
         <h1 class="text-pink" th:text="${recipe.title}"></h1>
     </div>
-    <div class="d-flex m-auto">
-        <div class="m-auto">
-            <img th:src="${recipe.urlPhoto}" alt="Recipe Image" class="m-5 mb-0 mt-0 img-fluid flex-shrink-0"
-                 style="height: 300px;"/>
-
-            <div class="text-center">
-                <h2 class="text-decoration-underline text-pink">INGREDIENTI</h2>
-                <p th:text="${recipe.ingredientsList}" class="text-white"></p>
-                <h2 class="text-decoration-underline text-pink">PREPARAZIONE:</h2>
-                <p th:text="${recipe.textOfRecipe}" class="text-white"></p>
+    <hr class="text-pink">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="row m-auto">
+            <div class="col-6 text-center">
+                <img th:src="${recipe.urlPhoto}" alt="Recipe Image" class="m-5 mb-0 mt-0 img-fluid flex-shrink-0"
+                     style="height: 300px;"/>
+            </div>
+            <div class="col-6">
                 <p class="card-text">
                     <i class="fa-solid fa-stopwatch text-pink"></i>
                     <span class="text-white" th:text="'Time: ' + ${recipe.timeOfPreparation} + 'm'"></span>
@@ -26,12 +24,18 @@
                     <i class="fa-solid fa-users text-pink"></i>
                     <span class="text-white" th:text="'Porzioni: ' + ${recipe.portion}"></span>
                 </p>
+                <h2 class="text-decoration-underline text-pink">INGREDIENTI</h2>
+                <p th:text="${recipe.ingredientsList}" class="text-white"></p>
+                <h2 class="text-decoration-underline text-pink">PREPARAZIONE:</h2>
+                <p th:text="${recipe.textOfRecipe}" class="text-white"></p>
+
             </div>
         </div>
-
     </div>
 </div>
-
+<div class="text-center">
+    <a th:href="@{/}" class="text-pink"> &lt;&lt;Torna a Ricette</a>
+</div>
 
 <th:block th:replace="fragments/script :: scriptBody"></th:block>
 </body>
