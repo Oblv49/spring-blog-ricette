@@ -30,7 +30,7 @@
                     </p>
                     <p class="card-text"
                        th:text="'Preparazione: ' + ${ricetta.textOfRecipe.substring(0, 50) + '...'}"></p>
-                    <a th:href="@{/dettaglio_ricetta/{id}(id=${ricetta.id})}" class="btn bg-pink"><i
+                    <a th:href="@{/show/{id}(id=${ricetta.id})}" class="btn bg-pink"><i
                             class="fa-solid fa-circle-info"></i></a>
                 </div>
             </div>
