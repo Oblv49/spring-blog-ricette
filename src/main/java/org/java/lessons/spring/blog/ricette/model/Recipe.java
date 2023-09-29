@@ -41,8 +41,12 @@ public class Recipe {
     @Column
     private LocalDateTime creationDate;
 
+    @ManyToOne
+    public Category category;
+
+
     //constructor
-    public Recipe(int id, String title, String ingredientsList, String urlPhoto, int timeOfPreparation, int portion, String textOfRecipe, LocalDateTime creationDate) {
+    public Recipe(int id, String title, String ingredientsList, String urlPhoto, int timeOfPreparation, int portion, String textOfRecipe, LocalDateTime creationDate, Category category) {
         this.id = id;
         this.title = title;
         this.ingredientsList = ingredientsList;
@@ -51,6 +55,7 @@ public class Recipe {
         this.portion = portion;
         this.textOfRecipe = textOfRecipe;
         this.creationDate = creationDate;
+        this.category = category;
     }
 
     //constructor default
@@ -121,5 +126,13 @@ public class Recipe {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

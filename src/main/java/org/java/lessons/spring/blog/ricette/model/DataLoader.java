@@ -1,5 +1,6 @@
 package org.java.lessons.spring.blog.ricette.model;
 
+import org.java.lessons.spring.blog.ricette.repository.CategoryRepository;
 import org.java.lessons.spring.blog.ricette.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -12,9 +13,42 @@ import java.time.LocalDateTime;
 public class DataLoader implements ApplicationRunner {
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public void run(ApplicationArguments args) {
         LocalDateTime today = LocalDateTime.now();
+
+        Category category1 = new Category();
+        category1.setName("Antipasto");
+        category1.setDescription("Descrizione dell'antipasto");
+        categoryRepository.save(category1);
+
+        Category category2 = new Category();
+        category2.setName("Primo Piatto");
+        category2.setDescription("Descrizione del primo piatto");
+        categoryRepository.save(category2);
+
+        Category category3 = new Category();
+        category3.setName("Secondo Piatto");
+        category3.setDescription("Descrizione del secondo piatto");
+        categoryRepository.save(category3);
+
+        Category category4 = new Category();
+        category4.setName("Contorno");
+        category4.setDescription("Descrizione del contorno");
+        categoryRepository.save(category4);
+
+        Category category5 = new Category();
+        category5.setName("Dessert");
+        category5.setDescription("Descrizione del dessert");
+        categoryRepository.save(category5);
+
+        Category category6 = new Category();
+        category6.setName("Bevande");
+        category6.setDescription("Descrizione delle bevande");
+        categoryRepository.save(category6);
+
 
         Recipe recipe1 = new Recipe();
         recipe1.setTitle("Pasta alla Carbonara");
@@ -24,6 +58,7 @@ public class DataLoader implements ApplicationRunner {
         recipe1.setPortion(2);
         recipe1.setTextOfRecipe("Cuoci la pasta in abbondante acqua salata finché non è al dente. Nel frattempo, rosola la pancetta in una padella finché diventa croccante. Scola la pasta e aggiungila alla padella con la pancetta. In una ciotola, sbatti le uova e aggiungi il pecorino romano grattugiato. Versa il composto di uova e formaggio sulla pasta e mescola bene. Aggiusta con abbondante pepe nero macinato. Servi caldo.");
         recipe1.setCreationDate(today);
+        recipe1.setCategory(category2);
         recipeRepository.save(recipe1);
 
 
@@ -35,6 +70,7 @@ public class DataLoader implements ApplicationRunner {
         recipe2.setPortion(4);
         recipe2.setTextOfRecipe("Taglia i pomodori a fette spesse e la mozzarella a fette dello stesso spessore. Alterna fette di pomodoro e mozzarella su un piatto. Aggiungi le foglie di basilico fresco tra gli strati. Condisci con olio extravergine di oliva e sale a piacere.");
         recipe2.setCreationDate(today);
+        recipe2.setCategory(category3);
         recipeRepository.save(recipe2);
 
 
@@ -46,6 +82,7 @@ public class DataLoader implements ApplicationRunner {
         recipe3.setPortion(6);
         recipe3.setTextOfRecipe("Prepara il caffè e lascialo raffreddare. In una ciotola, separa i tuorli dagli albumi. Sbatti i tuorli con lo zucchero finché otterrai un composto chiaro e spumoso. Aggiungi il mascarpone al composto di tuorli e zucchero e mescola bene. In un'altra ciotola, monta gli albumi a neve ferma e incorporali delicatamente alla crema di mascarpone. Immergi rapidamente i savoiardi nel caffè e foderane il fondo di una teglia. Versa metà della crema di mascarpone sulla base di savoiardi. Ripeti il processo con un altro strato di savoiardi e crema di mascarpone. Copri con pellicola trasparente e metti in frigorifero per almeno 4 ore o preferibilmente durante la notte. Prima di servire, spolvera la superficie con cacao amaro in polvere.");
         recipe3.setCreationDate(today);
+        recipe3.setCategory(category5);
         recipeRepository.save(recipe3);
     }
 }

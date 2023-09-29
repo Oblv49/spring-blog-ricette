@@ -80,7 +80,12 @@
                 </ul>
             </div>
         </div>
-
+        <div class="mb-3">
+            <label for="category" class="form-label text-white">Categoria</label>
+            <select class="form-select" id="category" th:field="*{category.id}">
+                <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+            </select>
+        </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-pink">Salva</button>
             <a class="btn btn-pink" th:href="@{/}">Annulla</a>

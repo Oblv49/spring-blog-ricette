@@ -1,7 +1,9 @@
 package org.java.lessons.spring.blog.ricette.controller;
 
 import jakarta.validation.Valid;
+import org.java.lessons.spring.blog.ricette.model.Category;
 import org.java.lessons.spring.blog.ricette.model.Recipe;
+import org.java.lessons.spring.blog.ricette.repository.CategoryRepository;
 import org.java.lessons.spring.blog.ricette.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,8 @@ import java.util.Optional;
 public class IndexController {
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping
     public String index(Model model) {
@@ -46,19 +50,24 @@ public class IndexController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("recipe", new Recipe());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "recipe/form";
     }
 
     @PostMapping("/create")
-    public String doCreate(@Valid @ModelAttribute("pizza") Recipe recipeForm, BindingResult bindingResult) {
-
+    public String doCreate(@Valid @ModelAttribute("pizza") Recipe recipeForm,
+                           @RequestParam("category.id") int categoryId,
+                           BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "recipe/form";
         }
+        Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+        optionalCategory.ifPresent(recipeForm::setCategory);
         recipeForm.setCreationDate(LocalDateTime.now());
         recipeRepository.save(recipeForm);
         return "redirect:/";
     }
+
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
