@@ -1,14 +1,14 @@
 package org.java.lessons.spring.blog.ricette.controller;
 
+import jakarta.validation.Valid;
 import org.java.lessons.spring.blog.ricette.model.Recipe;
 import org.java.lessons.spring.blog.ricette.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -40,5 +40,58 @@ public class IndexController {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "recipe/form";
+    }
+
+    @PostMapping("/create")
+    public String doCreate(@Valid @ModelAttribute("pizza") Recipe recipeForm, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "recipe/form";
+        }
+        recipeRepository.save(recipeForm);
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Recipe> result = recipeRepository.findById(id);
+        if (result.isPresent()) {
+            model.addAttribute("recipe", result.get());
+            return "recipe/edit";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe with id " + id + " not found");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("recipe") Recipe recipeForm,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "recipe/edit";
+        }
+        recipeRepository.save(recipeForm);
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteById(@PathVariable Integer id) {
+        recipeRepository.deleteById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("q") String searchString, Model model) {
+        List<Recipe> filteredPizzaList = recipeRepository.findByTitleContaining(searchString);
+        if (filteredPizzaList.isEmpty()) {
+            model.addAttribute("noResults", true);
+        }
+        model.addAttribute("recipes", filteredPizzaList);
+        return "recipe/list";
     }
 }
