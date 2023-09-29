@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class IndexController {
 
     @GetMapping
     public String index(Model model) {
-        List<Recipe> recipesList = recipeRepository.findAll();
+        List<Recipe> recipesList = recipeRepository.findAllByOrderByCreationDateDesc();
         model.addAttribute("recipes", recipesList);
         if (recipesList.isEmpty()) {
             model.addAttribute("messaggio", "Nessuna Ricetta disponibile.");
@@ -54,6 +55,7 @@ public class IndexController {
         if (bindingResult.hasErrors()) {
             return "recipe/form";
         }
+        recipeForm.setCreationDate(LocalDateTime.now());
         recipeRepository.save(recipeForm);
         return "redirect:/";
     }

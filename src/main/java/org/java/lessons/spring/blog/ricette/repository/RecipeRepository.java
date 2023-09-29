@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findByTitleContaining(String searchString);
+
+    List<Recipe> findAllByOrderByCreationDateDesc();
 }

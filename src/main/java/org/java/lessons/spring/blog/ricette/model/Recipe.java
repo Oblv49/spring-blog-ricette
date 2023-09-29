@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "RICETTA")
@@ -36,8 +38,11 @@ public class Recipe {
     @Column(length = 2048)
     private String textOfRecipe;
 
+    @Column
+    private LocalDateTime creationDate;
+
     //constructor
-    public Recipe(int id, String title, String ingredientsList, String urlPhoto, int timeOfPreparation, int portion, String textOfRecipe) {
+    public Recipe(int id, String title, String ingredientsList, String urlPhoto, int timeOfPreparation, int portion, String textOfRecipe, LocalDateTime creationDate) {
         this.id = id;
         this.title = title;
         this.ingredientsList = ingredientsList;
@@ -45,8 +50,8 @@ public class Recipe {
         this.timeOfPreparation = timeOfPreparation;
         this.portion = portion;
         this.textOfRecipe = textOfRecipe;
+        this.creationDate = creationDate;
     }
-
 
     //constructor default
     public Recipe() {
@@ -57,43 +62,64 @@ public class Recipe {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getIngredientsList() {
         return ingredientsList;
     }
+
     public void setIngredientsList(String ingredientsList) {
         this.ingredientsList = ingredientsList;
     }
+
     public String getUrlPhoto() {
         return urlPhoto;
     }
+
     public void setUrlPhoto(String urlPhoto) {
         this.urlPhoto = urlPhoto;
     }
+
     public int getTimeOfPreparation() {
         return timeOfPreparation;
     }
+
     public void setTimeOfPreparation(int timeOfPreparation) {
         this.timeOfPreparation = timeOfPreparation;
     }
+
     public int getPortion() {
         return portion;
     }
+
     public void setPortion(int portion) {
         this.portion = portion;
     }
+
     public String getTextOfRecipe() {
         return textOfRecipe;
     }
+
     public void setTextOfRecipe(String textOfRecipe) {
         this.textOfRecipe = textOfRecipe;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 }

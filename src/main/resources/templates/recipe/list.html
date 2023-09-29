@@ -33,6 +33,7 @@
                 <img th:src="${ricetta.urlPhoto}" alt="Foto Ricetta"/>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${ricetta.title}">Titolo Ricetta</h5>
+                    <p th:text="${ricetta.creationDate}"></p>
                     <p class="card-text">
                         <i class="fa-solid fa-stopwatch"></i>
                         <span th:text="'Time: ' + ${ricetta.timeOfPreparation} + 'm'"></span>
