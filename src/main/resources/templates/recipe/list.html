@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/script :: head('Le Nostre Ricette')"></head>
+
+<body class="bg-dark">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container">
+    <div class="row text-center mt-3">
+        <div class="col">
+            <h1 class="text-pink">Le Nostre Ricette</h1>
+        </div>
+    </div>
+
+    <hr class="text-pink">
+
+    <div class="row">
+        <div class="col-md-4 text-center" th:each="ricetta : ${recipes}">
+            <div class="card p-3 mb-2 m-auto" style="width: 18rem;">
+                <img th:src="${ricetta.urlPhoto}" alt="Foto Ricetta"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${ricetta.title}">Titolo Ricetta</h5>
+                    <p class="card-text"
+                       th:text="'Tempo di preparazione: ' + ${ricetta.timeOfPreparation} + ' minuti'"></p>
+                    <p class="card-text" th:text="'Porzioni: ' + ${ricetta.portion}"></p>
+                    <a th:href="@{/dettaglio_ricetta/{id}(id=${ricetta.id})}" class="btn bg-pink">Leggi di più</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block th:replace="fragments/script :: scriptBody"></th:block>
+</body>
+</html>
