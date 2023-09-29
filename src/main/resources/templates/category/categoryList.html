@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/script :: head('Lista Categorie')"></head>
+
+<body class="bg-dark">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container">
+    <h1 class="text-pink mt-3">Lista Categorie</h1>
+    <hr class="text-pink">
+</div>
+<div class="container" th:if="${#lists.size(categories) > 0}">
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th class="text-warning" scope="col">Nome Categoria</th>
+            <th class="text-warning" scope="col">Descrizione</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="align-items-center" th:each="category : ${categories}">
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
+            <td>
+                <div class="d-flex justify-content-center">
+                    <div class="m-2">
+                        <a th:href="@{/edit-category/{id}(id=${category.id})}" class="btn btn-pink">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                    </div>
+
+                    <div class="m-2">
+                        <form th:action="@{/delete-category/{id}(id=${category.id})}" method="POST">
+                            <button type="submit" class="btn btn-pink">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container" th:if="${#lists.size(categories) == 0}">
+    <h2 class="text-white">Nessuna categoria disponibile al momento.</h2>
+</div>
+
+<div class="text-center">
+    <a th:href="@{/}" class="text-pink"> &lt;&lt; Torna alla Home</a>
+</div>
+<th:block th:replace="fragments/script :: scriptBody"></th:block>
+</body>
+</html>

@@ -21,32 +21,32 @@ public class DataLoader implements ApplicationRunner {
 
         Category category1 = new Category();
         category1.setName("Antipasto");
-        category1.setDescription("Descrizione dell'antipasto");
+        category1.setDescription("Delizie leggere e gustose per iniziare il pasto in bellezza.");
         categoryRepository.save(category1);
 
         Category category2 = new Category();
         category2.setName("Primo Piatto");
-        category2.setDescription("Descrizione del primo piatto");
+        category2.setDescription("Le migliori ricette per un primo piatto da chef.");
         categoryRepository.save(category2);
 
         Category category3 = new Category();
         category3.setName("Secondo Piatto");
-        category3.setDescription("Descrizione del secondo piatto");
+        category3.setDescription("Piatti principali che conquisteranno il tuo palato.");
         categoryRepository.save(category3);
 
         Category category4 = new Category();
         category4.setName("Contorno");
-        category4.setDescription("Descrizione del contorno");
+        category4.setDescription("Accompagna i tuoi piatti con contorni freschi e saporiti.");
         categoryRepository.save(category4);
 
         Category category5 = new Category();
         category5.setName("Dessert");
-        category5.setDescription("Descrizione del dessert");
+        category5.setDescription("Dolci prelibatezze per concludere il pasto con dolcezza.");
         categoryRepository.save(category5);
 
         Category category6 = new Category();
         category6.setName("Bevande");
-        category6.setDescription("Descrizione delle bevande");
+        category6.setDescription("Rinfrescati con le migliori bevande e cocktail fatti in casa.");
         categoryRepository.save(category6);
 
 
